@@ -1,4 +1,4 @@
-package at.thejano.person;
+package at.thejano.entity;
 
 public class Person {
 
@@ -7,7 +7,6 @@ public class Person {
     }
 
     public Person(String firstname, String lastname, char gender, String email, String country, int age, boolean registered) {
-        this.id = id;
         this.gender = gender;
         this.firstname = firstname;
         this.lastname = lastname;

@@ -1,33 +1,37 @@
-package at.thejano.server;
+package at.thejano.service;
 
-import at.thejano.person.Person;
+import at.thejano.entity.Person;
+import at.thejano.repository.PersonRepository;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.LinkedList;
 import java.util.List;
 
-@Path("/person") public class ExampleResource {
+@ApplicationScoped
+@Path("/person") public class PersonService {
 
-    private List<Person> list  = new LinkedList<>();
+    @Inject
+    PersonRepository repo;
 
     @Path("/init")
     @GET
     @Produces (MediaType.TEXT_PLAIN)
     public String init() {
-        list.add(new Person("Jan", "Fischlmayr", 'M', "jan.fischlmayr@mail.com", "Austria", 18, true));
-        list.add(new Person("David", "Braus", 'M', "david.braus@mail.com", "Austria", 18, false));
-        list.add(new Person("Daniel", "Kastenarduino", 'M', "daniel.kastenarduino@mail.com", "Austria", 17, false));
-        return "Init worked";
+        repo.add(new Person("Jan", "Fischlmayr", 'M', "jan.fischlmayr@mail.com", "Austria", 18, true));
+        repo.add(new Person("David", "Braus", 'M', "david.braus@mail.com", "Austria", 18, false));
+        repo.add(new Person("Daniel", "Kastenarduino", 'M', "daniel.kastenarduino@mail.com", "Austria", 17, false));
+        return "Init worked /findAll for a List of the Persons";
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/findAll")
     public List<Person> findAll(){
-        return list;
+        return repo.getAll();
     }
 
 
