@@ -20,4 +20,8 @@ public class PersonRepository {
         persons.add(person);
         ID++;
     }
+
+    public boolean delete(long id) {
+        return persons.remove(id);
+    }
 }
